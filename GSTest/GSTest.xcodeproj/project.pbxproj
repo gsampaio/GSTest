@@ -20,7 +20,9 @@
 		C087CD53179A3E89006A85A6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C087CD32179A3E89006A85A6 /* Foundation.framework */; };
 		C087CD54179A3E89006A85A6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C087CD36179A3E89006A85A6 /* UIKit.framework */; };
 		C087CD5C179A3E89006A85A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C087CD5A179A3E89006A85A6 /* InfoPlist.strings */; };
-		C087CD5E179A3E89006A85A6 /* GSTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C087CD5D179A3E89006A85A6 /* GSTestTests.m */; };
+		C087CD69179A3EF4006A85A6 /* GSNetworkMockURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = C087CD68179A3EF4006A85A6 /* GSNetworkMockURLProtocol.m */; };
+		C087CD6A179A3EF4006A85A6 /* GSNetworkMockURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = C087CD68179A3EF4006A85A6 /* GSNetworkMockURLProtocol.m */; };
+		C087CD6C179A3F19006A85A6 /* GSNetworkMockURLProtocolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C087CD6B179A3F19006A85A6 /* GSNetworkMockURLProtocolTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +54,9 @@
 		C087CD51179A3E89006A85A6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		C087CD59179A3E89006A85A6 /* GSTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GSTestTests-Info.plist"; sourceTree = "<group>"; };
 		C087CD5B179A3E89006A85A6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C087CD5D179A3E89006A85A6 /* GSTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GSTestTests.m; sourceTree = "<group>"; };
+		C087CD67179A3EF4006A85A6 /* GSNetworkMockURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSNetworkMockURLProtocol.h; path = GSTest/GSTest/GSNetworkMockURLProtocol.h; sourceTree = "<group>"; };
+		C087CD68179A3EF4006A85A6 /* GSNetworkMockURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GSNetworkMockURLProtocol.m; path = GSTest/GSTest/GSNetworkMockURLProtocol.m; sourceTree = "<group>"; };
+		C087CD6B179A3F19006A85A6 /* GSNetworkMockURLProtocolTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSNetworkMockURLProtocolTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 		C087CD26179A3E89006A85A6 = {
 			isa = PBXGroup;
 			children = (
+				C087CD67179A3EF4006A85A6 /* GSNetworkMockURLProtocol.h */,
+				C087CD68179A3EF4006A85A6 /* GSNetworkMockURLProtocol.m */,
 				C087CD38179A3E89006A85A6 /* GSTest */,
 				C087CD57179A3E89006A85A6 /* GSTestTests */,
 				C087CD31179A3E89006A85A6 /* Frameworks */,
@@ -137,8 +143,8 @@
 		C087CD57179A3E89006A85A6 /* GSTestTests */ = {
 			isa = PBXGroup;
 			children = (
-				C087CD5D179A3E89006A85A6 /* GSTestTests.m */,
 				C087CD58179A3E89006A85A6 /* Supporting Files */,
+				C087CD6B179A3F19006A85A6 /* GSNetworkMockURLProtocolTests.m */,
 			);
 			path = GSTestTests;
 			sourceTree = "<group>";
@@ -250,6 +256,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C087CD69179A3EF4006A85A6 /* GSNetworkMockURLProtocol.m in Sources */,
 				C087CD43179A3E89006A85A6 /* GSAppDelegate.m in Sources */,
 				C087CD49179A3E89006A85A6 /* GSViewController.m in Sources */,
 				C087CD3F179A3E89006A85A6 /* main.m in Sources */,
@@ -260,7 +267,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C087CD5E179A3E89006A85A6 /* GSTestTests.m in Sources */,
+				C087CD6A179A3EF4006A85A6 /* GSNetworkMockURLProtocol.m in Sources */,
+				C087CD6C179A3F19006A85A6 /* GSNetworkMockURLProtocolTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
