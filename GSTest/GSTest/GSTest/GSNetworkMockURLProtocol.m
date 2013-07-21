@@ -23,7 +23,7 @@ NSString const * GSMockDataHeadersKey = @"GSMockDataHeaders";
 @implementation GSNetworkMockURLProtocol
 
 static NSData *GSNetworkMockURLProtocolResponse;
-static NSUInteger GSNetworkMockURLProtocolStatusCode;
+static NSUInteger GSNetworkMockURLProtocolStatusCode = 200;
 static NSError * GSNetworkMockURLProtocolError;
 
 + (NSData*) responseDataWithObject:(id)object forResponseType:(GSNetworkMockDataResponseType)type
