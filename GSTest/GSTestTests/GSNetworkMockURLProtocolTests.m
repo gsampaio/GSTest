@@ -119,7 +119,7 @@
     }];
 }
 
-- (void)testMockDataShouldReturnPassedDataWhenMakingARequest
+- (void)testMockDataShouldReturnPassedDataStringWhenMakingARequest
 {
     NSString * expectedString = @"Test string";
     NSDictionary *mockData = @{
@@ -139,6 +139,64 @@
         XCTAssertEqualObjects(expectedString, responseString, @"The string passed to the mock data should be equal to the returned string from the [NSData dataWithContentsOfURL:options:error:]");
     
     }];
+}
+
+- (void)testMockDataShouldReturnPassedDataJSONDictionary
+{
+    NSDictionary *jsonData = @{
+                               @"key" : @"value"
+                               };
+    
+    NSDictionary *mockData = @{
+                               GSMockDataResponseDataKey : jsonData,
+                               GSMockDataResponseTypeKey : @(GSNetworkMockDataResponseTypeJSON),
+                               GSMockDataStatusKey : @(200)
+                               };
+    [GSNetworkMockURLProtocol mockData:mockData];
+    [GSNetworkMockURLProtocol executeTestWithBlock:^{
+        NSError *error = nil;
+        NSData *data = [NSData dataWithContentsOfURL:self.URL options:NSDataReadingUncached error:&error];
+        
+        XCTAssertNil(error, @"Error data should be nil since mocked status is 200");
+        
+        NSDictionary *dataAsJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+        
+        XCTAssertTrue([dataAsJSON isKindOfClass:[NSDictionary class]], @"The JSON data should be a dictionary");
+        XCTAssertEqualObjects(jsonData, dataAsJSON, @"The returned JSON should be equals to the mocked one");
+    }];
+}
+
+- (void)testMockDataShouldReturnPassedDataJSONArray
+{
+    NSArray *jsonArray = @[@{@"key" : @"value1"}, @{@"key" : @"value2"}];
+    
+    NSDictionary *mockData = @{
+                               GSMockDataResponseDataKey : jsonArray,
+                               GSMockDataResponseTypeKey : @(GSNetworkMockDataResponseTypeJSON),
+                               GSMockDataStatusKey : @(200)
+                               };
+    [GSNetworkMockURLProtocol mockData:mockData];
+    [GSNetworkMockURLProtocol executeTestWithBlock:^{
+        NSError *error = nil;
+        NSData *data = [NSData dataWithContentsOfURL:self.URL options:NSDataReadingUncached error:&error];
+        
+        XCTAssertNil(error, @"Error data should be nil since mocked status is 200");
+        
+        NSArray *dataAsJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+        
+        XCTAssertTrue([dataAsJSON isKindOfClass:[NSArray class]], @"The JSON data should be an array");
+        XCTAssertEqualObjects(jsonArray, dataAsJSON, @"The returned JSON should be equals to the mocked one");
+    }];
+}
+
+- (void)testMockDataThrowsExceptionWhenStringPassedAsJSON
+{
+    NSString *testString = @"test";
+    NSDictionary *mockData = @{
+                               GSMockDataResponseDataKey : testString,
+                               GSMockDataResponseTypeKey : @(GSNetworkMockDataResponseTypeJSON)
+                               };
+    XCTAssertThrows([GSNetworkMockURLProtocol mockData:mockData], @"String passed as a JSON should throw a excepetion");
 }
 
 #pragma mark - +[GSNetworkMockURLProtocol executeTestWithBlock:] tests

@@ -34,6 +34,12 @@ static NSError * GSNetworkMockURLProtocolError;
             GSNetworkMockURLProtocolResponse = [object dataUsingEncoding:NSUTF8StringEncoding];
         }
             break;
+            
+        case GSNetworkMockDataResponseTypeJSON:
+        {
+            GSNetworkMockURLProtocolResponse = [NSJSONSerialization dataWithJSONObject:object options:NSJSONWritingPrettyPrinted error:nil];
+        }
+            break;
         default:
             GSNetworkMockURLProtocolResponse = nil;
             break;
@@ -62,7 +68,11 @@ static NSError * GSNetworkMockURLProtocolError;
 
     // Parse the response data
     if (mockData[GSMockDataResponseDataKey]) {
-        [GSNetworkMockURLProtocol responseDataWithObject:mockData[GSMockDataResponseDataKey] forResponseType:[mockData[GSMockDataResponseTypeKey] unsignedIntegerValue]];
+        NSUInteger type = [mockData[GSMockDataResponseTypeKey] unsignedIntegerValue];
+        if (type == GSNetworkMockDataResponseTypeJSON) {
+            NSAssert([mockData[GSMockDataResponseDataKey] isKindOfClass:[NSArray class]] || [mockData[GSMockDataResponseDataKey] isKindOfClass:[NSDictionary class]], @"JSON data must be a dictionary or an array");
+        }
+        [GSNetworkMockURLProtocol responseDataWithObject:mockData[GSMockDataResponseDataKey] forResponseType:type];
     }
     
     // Parse the response data
