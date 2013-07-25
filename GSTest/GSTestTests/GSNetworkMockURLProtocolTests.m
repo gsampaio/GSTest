@@ -8,6 +8,9 @@
 
 #import <XCTest/XCTest.h>
 #import "GSNetworkMockURLProtocol.h"
+#import "GSNetworkMockData.h"
+#import "GSNetworkMockDataStringParameter.h"
+#import "GSNetworkMockDataJSONParameter.h"
 
 @interface GSNetworkMockURLProtocolTests : XCTestCase
 @property (nonatomic, strong) NSURL *URL;
@@ -40,52 +43,15 @@
     XCTAssertTrue(networkMockURLProtocolIsSubclass, @"GSNetworkMockURLProtocol should be subclass of NSURLProtocol");
 }
 
-#pragma mark - +[GSNetworkMockURLProtocol mockData] tests
-- (void)testMockDataIsNilShouldThrowException
-{
-    XCTAssertThrows([GSNetworkMockURLProtocol mockData:nil], @"Calling GSNetworkMockURLProtocol mockData with nil parameter should throws a NSInvalidParameterExeception");
-}
-
-- (void)testMockDataNotNilShouldNotThrowException
-{
-    XCTAssertNoThrow([GSNetworkMockURLProtocol mockData:@{}], @"Calling GSNetworkMockURLProtocol mockData with a valid parameter should not throw a NSInvalidParameterExeception");
-}
-
-- (void)testMockDataThrowExceptionIfThereIsResposeDataAndNotResponseType
-{
-    NSDictionary *mockData = @{GSMockDataResponseDataKey : @""};
-    XCTAssertThrows([GSNetworkMockURLProtocol mockData:mockData], @"Calling mockData passing a ResponseData but not passing a ResponseType should throw an exception");
-}
-
-- (void)testMockDataThrowsWhenStatusIsNotANumber
-{
-    NSDictionary *mockData = @{GSMockDataStatusKey: @"TEST"};
-    XCTAssertThrows([GSNetworkMockURLProtocol mockData:mockData], @"Calling mockData passing a NSString on the GSMockDataStatusKey should throw a exception");
-}
-
-- (void)testMockDataNotThrowsWhenStatusIsANumber
-{
-    NSDictionary *mockData = @{GSMockDataStatusKey: @(200)};
-    XCTAssertNoThrow([GSNetworkMockURLProtocol mockData:mockData], @"Calling mockData passing a NSNumber on the GSMockDataStatusKey should not throw a exception");
-}
-
-- (void)testMockDataDefaulStatusIs200
-{
-    [GSNetworkMockURLProtocol executeTestWithBlock:^{
-    
-        NSError *error;
-        [NSData dataWithContentsOfURL:self.URL options:0 error:&error];
-        
-        XCTAssertNil(error, @"The NSError should be nil since the default status is 200");
-    
-    }];
-}
+#pragma mark - +[GSNetworkMockURLProtocol executeMockData:withTestBlock:]
+ tests
 
 - (void)testMockDataErrorWhenStatusIs500
 {
-    [GSNetworkMockURLProtocol mockData:@{GSMockDataStatusKey: @(500)}];
+    GSNetworkMockData *mockData = [[GSNetworkMockData alloc] init];
+    mockData.status = 500;
     
-    [GSNetworkMockURLProtocol executeTestWithBlock:^{
+    [GSNetworkMockURLProtocol executeMockData:mockData withTestBlock:^{
         
         NSError *error;
         [NSData dataWithContentsOfURL:self.URL options:0 error:&error];
@@ -95,23 +61,14 @@
     }];
 }
 
-- (void)testMockDataThrowsExceptionWhenWePassAErrorThatIsNotKindOfNSError
-{
-    XCTAssertThrows([GSNetworkMockURLProtocol mockData:@{GSMockDataErrorKey : @"error"}], @"Mock data should throw a exception when the user pass a class that isnt NSError for the error key");
-}
-
-- (void)testMockDataDoesNotThrowsExceptionWhenWePassAErrorThatIsKindOfNSError
-{
-    XCTAssertNoThrow([GSNetworkMockURLProtocol mockData:@{GSMockDataErrorKey : self.error}], @"Mock data should throw a exception when the user pass a class that isnt NSError for the error key");
-}
-
 - (void)testMockdataErrorWhenWePassAErrorEvenWeStatusIs200
 {
-    [GSNetworkMockURLProtocol mockData:@{
-                                         GSMockDataStatusKey : @(200),
-                                         GSMockDataErrorKey : self.error
-                                         }];
-    [GSNetworkMockURLProtocol executeTestWithBlock:^{
+    GSNetworkMockData *mockData = [[GSNetworkMockData alloc] init];
+    mockData.status = 200;
+    mockData.error = self.error;
+    
+    [GSNetworkMockURLProtocol executeMockData:mockData withTestBlock:^{
+        
         NSError *requestError;
         [NSData dataWithContentsOfURL:self.URL options:0 error:&requestError];
         
@@ -122,13 +79,12 @@
 - (void)testMockDataShouldReturnPassedDataStringWhenMakingARequest
 {
     NSString * expectedString = @"Test string";
-    NSDictionary *mockData = @{
-                               GSMockDataResponseDataKey : expectedString,
-                               GSMockDataResponseTypeKey : @(GSNetworkMockDataResponseTypeString),
-                             };
-    [GSNetworkMockURLProtocol mockData:mockData];
     
-    [GSNetworkMockURLProtocol executeTestWithBlock:^{
+    GSNetworkMockData *mockData = [GSNetworkMockData status200MockData];
+    mockData.parameter = [GSNetworkMockDataStringParameter mockDataParameterWithParameter:expectedString];
+    
+    [GSNetworkMockURLProtocol executeMockData:mockData withTestBlock:^{
+        
         NSError *error;
         NSData *data = [NSData dataWithContentsOfURL:self.URL
                                              options:NSDataReadingUncached
@@ -147,13 +103,11 @@
                                @"key" : @"value"
                                };
     
-    NSDictionary *mockData = @{
-                               GSMockDataResponseDataKey : jsonData,
-                               GSMockDataResponseTypeKey : @(GSNetworkMockDataResponseTypeJSON),
-                               GSMockDataStatusKey : @(200)
-                               };
-    [GSNetworkMockURLProtocol mockData:mockData];
-    [GSNetworkMockURLProtocol executeTestWithBlock:^{
+    GSNetworkMockData *mockData = [GSNetworkMockData status200MockData];
+    mockData.parameter = [GSNetworkMockDataJSONParameter mockDataParameterWithParameter:jsonData];
+    
+    [GSNetworkMockURLProtocol executeMockData:mockData withTestBlock:^{
+        
         NSError *error = nil;
         NSData *data = [NSData dataWithContentsOfURL:self.URL options:NSDataReadingUncached error:&error];
         
@@ -170,13 +124,12 @@
 {
     NSArray *jsonArray = @[@{@"key" : @"value1"}, @{@"key" : @"value2"}];
     
-    NSDictionary *mockData = @{
-                               GSMockDataResponseDataKey : jsonArray,
-                               GSMockDataResponseTypeKey : @(GSNetworkMockDataResponseTypeJSON),
-                               GSMockDataStatusKey : @(200)
-                               };
-    [GSNetworkMockURLProtocol mockData:mockData];
-    [GSNetworkMockURLProtocol executeTestWithBlock:^{
+    GSNetworkMockData *mockData = [[GSNetworkMockData alloc] init];
+    mockData.parameter = [GSNetworkMockDataJSONParameter mockDataParameterWithParameter:jsonArray];
+    mockData.status = 200;
+    
+    [GSNetworkMockURLProtocol executeMockData:mockData withTestBlock:^{
+        
         NSError *error = nil;
         NSData *data = [NSData dataWithContentsOfURL:self.URL options:NSDataReadingUncached error:&error];
         
@@ -189,21 +142,11 @@
     }];
 }
 
-- (void)testMockDataThrowsExceptionWhenStringPassedAsJSON
-{
-    NSString *testString = @"test";
-    NSDictionary *mockData = @{
-                               GSMockDataResponseDataKey : testString,
-                               GSMockDataResponseTypeKey : @(GSNetworkMockDataResponseTypeJSON)
-                               };
-    XCTAssertThrows([GSNetworkMockURLProtocol mockData:mockData], @"String passed as a JSON should throw a excepetion");
-}
-
-#pragma mark - +[GSNetworkMockURLProtocol executeTestWithBlock:] tests
 - (void)testExecuteTestWithBlockCallsTheBlockAndExecuteSynchronous
 {
+    GSNetworkMockData *mockData = [GSNetworkMockData status200MockData];
     __block BOOL wasAccessed = NO;
-    [GSNetworkMockURLProtocol executeTestWithBlock:^{
+    [GSNetworkMockURLProtocol executeMockData:mockData withTestBlock:^{
         wasAccessed = YES;
     }];
     
@@ -212,7 +155,8 @@
 
 - (void)testExecuteTestWithBlockWithANilBlockWorks
 {
-    XCTAssertNoThrow([GSNetworkMockURLProtocol executeTestWithBlock:nil], @"The call of executeTestWithBlock should not throw an exception");
+    GSNetworkMockData *mockData = [GSNetworkMockData status200MockData];
+    XCTAssertNoThrow([GSNetworkMockURLProtocol executeMockData:mockData withTestBlock:nil], @"The call of executeTestWithBlock should not throw an exception");
 }
 
 #pragma mark - +[GSNetworkMockURLProtocol canInitWithRequest:] tests

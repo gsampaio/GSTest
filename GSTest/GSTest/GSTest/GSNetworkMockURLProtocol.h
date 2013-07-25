@@ -7,19 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
-extern NSString const * GSMockDataResponseDataKey;
-extern NSString const * GSMockDataResponseTypeKey;
-extern NSString const * GSMockDataStatusKey;
-extern NSString const * GSMockDataErrorKey;
-extern NSString const * GSMockDataHeadersKeys;
-
-typedef NS_ENUM(NSUInteger, GSNetworkMockDataResponseType) {
-    GSNetworkMockDataResponseTypeString,
-    GSNetworkMockDataResponseTypeJSON
-};
+#import "GSNetworkMockData.h"
 
 @interface GSNetworkMockURLProtocol : NSURLProtocol
-+ (void)mockData:(NSDictionary*)mockData;
-+ (void)executeTestWithBlock:(void(^)(void))block;
++ (void)executeMockData:(GSNetworkMockData*)mockData withTestBlock:(void(^)(void))block;
 @end

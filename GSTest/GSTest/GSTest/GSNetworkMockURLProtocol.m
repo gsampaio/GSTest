@@ -8,12 +8,6 @@
 
 #import "GSNetworkMockURLProtocol.h"
 
-NSString const * GSMockDataResponseDataKey = @"GSMockDataResponseData";
-NSString const * GSMockDataResponseTypeKey = @"GSMockDataResponseType";
-NSString const * GSMockDataStatusKey = @"GSMockDataStatus";
-NSString const * GSMockDataErrorKey = @"GSMockDataError";
-NSString const * GSMockDataHeadersKey = @"GSMockDataHeaders";
-
 // Undocumented initializer obtained by class-dump - don't use this in production code destined for the App Store
 @interface NSHTTPURLResponse(UndocumentedInitializer)
 - (id)initWithURL:(NSURL*)URL statusCode:(NSInteger)statusCode headerFields:(NSDictionary*)headerFields requestTime:(double)requestTime;
@@ -22,76 +16,19 @@ NSString const * GSMockDataHeadersKey = @"GSMockDataHeaders";
 
 @implementation GSNetworkMockURLProtocol
 
-static NSData *GSNetworkMockURLProtocolResponse;
-static NSUInteger GSNetworkMockURLProtocolStatusCode = 200;
-static NSError * GSNetworkMockURLProtocolError;
+static GSNetworkMockData *GSNetworkMockURLProtocolMockData;
 
-+ (NSData*) responseDataWithObject:(id)object forResponseType:(GSNetworkMockDataResponseType)type
++ (void)executeMockData:(GSNetworkMockData*)mockData withTestBlock:(void(^)(void))block
 {
-    switch (type) {
-        case GSNetworkMockDataResponseTypeString:
-        {
-            GSNetworkMockURLProtocolResponse = [object dataUsingEncoding:NSUTF8StringEncoding];
-        }
-            break;
-            
-        case GSNetworkMockDataResponseTypeJSON:
-        {
-            GSNetworkMockURLProtocolResponse = [NSJSONSerialization dataWithJSONObject:object options:NSJSONWritingPrettyPrinted error:nil];
-        }
-            break;
-        default:
-            GSNetworkMockURLProtocolResponse = nil;
-            break;
-    }
+    // Assert that the mockData is valid
+    NSAssert(mockData, @"Mock Data should not be nil");
     
-    return GSNetworkMockURLProtocolResponse;
-}
-
-+ (void)setNetworkStatusCode:(NSNumber *)networkStatus
-{
-    GSNetworkMockURLProtocolStatusCode = [networkStatus unsignedIntegerValue];
-}
-
-+ (void)setError:(NSError*)error
-{
-    GSNetworkMockURLProtocolError = error;
-}
-
-+ (void)mockData:(NSDictionary*)mockData
-{
-    // Assert that we have a mockData dictionary
-    NSParameterAssert(mockData);
     
-    // Asserts that if we have a responseData we have a responseType
-    NSAssert(!mockData[GSMockDataResponseDataKey] || (mockData[GSMockDataResponseDataKey] && mockData[GSMockDataResponseTypeKey]), @"If you pass a ResponseData you need to pass a Response Type");
-
-    // Parse the response data
-    if (mockData[GSMockDataResponseDataKey]) {
-        NSUInteger type = [mockData[GSMockDataResponseTypeKey] unsignedIntegerValue];
-        if (type == GSNetworkMockDataResponseTypeJSON) {
-            NSAssert([mockData[GSMockDataResponseDataKey] isKindOfClass:[NSArray class]] || [mockData[GSMockDataResponseDataKey] isKindOfClass:[NSDictionary class]], @"JSON data must be a dictionary or an array");
-        }
-        [GSNetworkMockURLProtocol responseDataWithObject:mockData[GSMockDataResponseDataKey] forResponseType:type];
-    }
-    
-    // Parse the response data
-    if (mockData[GSMockDataStatusKey]) {
-        NSAssert([mockData[GSMockDataStatusKey] isKindOfClass:[NSNumber class]], @"The status code must be kind of NSNumber class");
-        [self setNetworkStatusCode:mockData[GSMockDataStatusKey]];
-    }
-    
-    // Parse the error data
-    if (mockData[GSMockDataErrorKey]) {
-        NSAssert([mockData[GSMockDataErrorKey] isKindOfClass:[NSError class]], @"The error must be kind of NSError");
-        [self setError:mockData[GSMockDataErrorKey]];
-    }
-}
-
-+ (void)executeTestWithBlock:(void(^)(void))block
-{
     // Register the class on the NSURLProtocol
     [NSURLProtocol registerClass:[GSNetworkMockURLProtocol class]];
+    
+    // Set the mockData settings on the protocol
+    [self setMockData:mockData];
     
     // Execute the test block if it exists
     if (block) block();
@@ -101,14 +38,17 @@ static NSError * GSNetworkMockURLProtocolError;
     
     // Unregiste the class on the NSURLProtocol
     [NSURLProtocol unregisterClass:[GSNetworkMockURLProtocol class]];
-    
+
+}
+
++ (void)setMockData:(GSNetworkMockData *)mockData
+{
+    GSNetworkMockURLProtocolMockData = mockData;
 }
 
 + (void)resetMockData
 {
-    GSNetworkMockURLProtocolError = nil;
-    GSNetworkMockURLProtocolResponse = nil;
-    GSNetworkMockURLProtocolStatusCode = 200;
+    GSNetworkMockURLProtocolMockData = nil;
 }
 
 #pragma mark - NSURLProtocol methods
@@ -127,16 +67,17 @@ static NSError * GSNetworkMockURLProtocolError;
     NSURLRequest *request = [self request];
     id<NSURLProtocolClient> client = [self client];
     
-    if (GSNetworkMockURLProtocolError) {
-        [client URLProtocol:self didFailWithError:GSNetworkMockURLProtocolError];
+    if (GSNetworkMockURLProtocolMockData.error) {
+        [client URLProtocol:self didFailWithError:GSNetworkMockURLProtocolMockData.error];
     } else {
         NSHTTPURLResponse *response = [[NSHTTPURLResponse alloc] initWithURL:[request URL]
-                                                                  statusCode:GSNetworkMockURLProtocolStatusCode
+                                                                  statusCode:GSNetworkMockURLProtocolMockData.status
                                                                 headerFields:nil
                                                                  requestTime:0.0];
         
         [client URLProtocol:self didReceiveResponse:response cacheStoragePolicy:NSURLCacheStorageNotAllowed];
-        [client URLProtocol:self didLoadData:GSNetworkMockURLProtocolResponse];
+        NSData *data = [GSNetworkMockURLProtocolMockData.parameter dataForParameter];
+        [client URLProtocol:self didLoadData:data];
         [client URLProtocolDidFinishLoading:self];
         
     }

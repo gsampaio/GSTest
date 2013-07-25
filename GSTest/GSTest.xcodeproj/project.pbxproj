@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C05A0A9017A1D1A900D64720 /* GSNetworkMockDataStringParameterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C05A0A8F17A1D1A900D64720 /* GSNetworkMockDataStringParameterTests.m */; };
+		C05A0A9217A1D38800D64720 /* GSNetworkMockDataJSONParameterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C05A0A9117A1D38800D64720 /* GSNetworkMockDataJSONParameterTests.m */; };
+		C0659802179C8AB8003BC69D /* GSNetworkMockData.m in Sources */ = {isa = PBXBuildFile; fileRef = C0659801179C8AB8003BC69D /* GSNetworkMockData.m */; };
+		C0659805179C8BAC003BC69D /* GSNetworkMockDataParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = C0659804179C8BAC003BC69D /* GSNetworkMockDataParameter.m */; };
+		C0659809179C8BFB003BC69D /* GSNetworkMockDataStringParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = C0659808179C8BFB003BC69D /* GSNetworkMockDataStringParameter.m */; };
+		C065980E179C8C6C003BC69D /* GSNetworkMockDataJSONParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = C065980D179C8C6C003BC69D /* GSNetworkMockDataJSONParameter.m */; };
 		C087CD33179A3E89006A85A6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C087CD32179A3E89006A85A6 /* Foundation.framework */; };
 		C087CD35179A3E89006A85A6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C087CD34179A3E89006A85A6 /* CoreGraphics.framework */; };
 		C087CD37179A3E89006A85A6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C087CD36179A3E89006A85A6 /* UIKit.framework */; };
@@ -23,6 +29,7 @@
 		C087CD69179A3EF4006A85A6 /* GSNetworkMockURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = C087CD68179A3EF4006A85A6 /* GSNetworkMockURLProtocol.m */; };
 		C087CD6A179A3EF4006A85A6 /* GSNetworkMockURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = C087CD68179A3EF4006A85A6 /* GSNetworkMockURLProtocol.m */; };
 		C087CD6C179A3F19006A85A6 /* GSNetworkMockURLProtocolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C087CD6B179A3F19006A85A6 /* GSNetworkMockURLProtocolTests.m */; };
+		C0FAFBEF17A177F3007E7EDE /* GSNetworkMockDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C0FAFBED17A177F3007E7EDE /* GSNetworkMockDataTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +43,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C05A0A8F17A1D1A900D64720 /* GSNetworkMockDataStringParameterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSNetworkMockDataStringParameterTests.m; sourceTree = "<group>"; };
+		C05A0A9117A1D38800D64720 /* GSNetworkMockDataJSONParameterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSNetworkMockDataJSONParameterTests.m; sourceTree = "<group>"; };
+		C0659800179C8AB8003BC69D /* GSNetworkMockData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSNetworkMockData.h; path = GSTest/GSNetworkMockData.h; sourceTree = "<group>"; };
+		C0659801179C8AB8003BC69D /* GSNetworkMockData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GSNetworkMockData.m; path = GSTest/GSNetworkMockData.m; sourceTree = "<group>"; };
+		C0659803179C8BAC003BC69D /* GSNetworkMockDataParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSNetworkMockDataParameter.h; path = GSTest/GSTest/GSNetworkMockDataParameter.h; sourceTree = "<group>"; };
+		C0659804179C8BAC003BC69D /* GSNetworkMockDataParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GSNetworkMockDataParameter.m; path = GSTest/GSTest/GSNetworkMockDataParameter.m; sourceTree = "<group>"; };
+		C0659807179C8BFB003BC69D /* GSNetworkMockDataStringParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSNetworkMockDataStringParameter.h; path = GSTest/GSTest/GSNetworkMockDataStringParameter.h; sourceTree = "<group>"; };
+		C0659808179C8BFB003BC69D /* GSNetworkMockDataStringParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GSNetworkMockDataStringParameter.m; path = GSTest/GSTest/GSNetworkMockDataStringParameter.m; sourceTree = "<group>"; };
+		C065980C179C8C6C003BC69D /* GSNetworkMockDataJSONParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSNetworkMockDataJSONParameter.h; path = GSTest/GSTest/GSNetworkMockDataJSONParameter.h; sourceTree = "<group>"; };
+		C065980D179C8C6C003BC69D /* GSNetworkMockDataJSONParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GSNetworkMockDataJSONParameter.m; path = GSTest/GSTest/GSNetworkMockDataJSONParameter.m; sourceTree = "<group>"; };
 		C087CD2F179A3E89006A85A6 /* GSTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GSTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C087CD32179A3E89006A85A6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C087CD34179A3E89006A85A6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -54,9 +71,10 @@
 		C087CD51179A3E89006A85A6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		C087CD59179A3E89006A85A6 /* GSTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GSTestTests-Info.plist"; sourceTree = "<group>"; };
 		C087CD5B179A3E89006A85A6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C087CD67179A3EF4006A85A6 /* GSNetworkMockURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSNetworkMockURLProtocol.h; path = GSTest/GSTest/GSNetworkMockURLProtocol.h; sourceTree = "<group>"; };
-		C087CD68179A3EF4006A85A6 /* GSNetworkMockURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GSNetworkMockURLProtocol.m; path = GSTest/GSTest/GSNetworkMockURLProtocol.m; sourceTree = "<group>"; };
+		C087CD67179A3EF4006A85A6 /* GSNetworkMockURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSNetworkMockURLProtocol.h; path = GSTest/GSNetworkMockURLProtocol.h; sourceTree = "<group>"; };
+		C087CD68179A3EF4006A85A6 /* GSNetworkMockURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GSNetworkMockURLProtocol.m; path = GSTest/GSNetworkMockURLProtocol.m; sourceTree = "<group>"; };
 		C087CD6B179A3F19006A85A6 /* GSNetworkMockURLProtocolTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSNetworkMockURLProtocolTests.m; sourceTree = "<group>"; };
+		C0FAFBED17A177F3007E7EDE /* GSNetworkMockDataTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSNetworkMockDataTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,11 +101,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C05A0A8E17A1D16600D64720 /* MockDataParameter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = MockDataParameter;
+			sourceTree = "<group>";
+		};
+		C0659806179C8BE1003BC69D /* MockDataParameter */ = {
+			isa = PBXGroup;
+			children = (
+				C065980B179C8C53003BC69D /* JSON */,
+				C065980A179C8C4F003BC69D /* String */,
+				C0659803179C8BAC003BC69D /* GSNetworkMockDataParameter.h */,
+				C0659804179C8BAC003BC69D /* GSNetworkMockDataParameter.m */,
+			);
+			name = MockDataParameter;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		C065980A179C8C4F003BC69D /* String */ = {
+			isa = PBXGroup;
+			children = (
+				C0659807179C8BFB003BC69D /* GSNetworkMockDataStringParameter.h */,
+				C0659808179C8BFB003BC69D /* GSNetworkMockDataStringParameter.m */,
+			);
+			name = String;
+			sourceTree = "<group>";
+		};
+		C065980B179C8C53003BC69D /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				C065980C179C8C6C003BC69D /* GSNetworkMockDataJSONParameter.h */,
+				C065980D179C8C6C003BC69D /* GSNetworkMockDataJSONParameter.m */,
+			);
+			name = JSON;
+			sourceTree = "<group>";
+		};
 		C087CD26179A3E89006A85A6 = {
 			isa = PBXGroup;
 			children = (
-				C087CD67179A3EF4006A85A6 /* GSNetworkMockURLProtocol.h */,
-				C087CD68179A3EF4006A85A6 /* GSNetworkMockURLProtocol.m */,
 				C087CD38179A3E89006A85A6 /* GSTest */,
 				C087CD57179A3E89006A85A6 /* GSTestTests */,
 				C087CD31179A3E89006A85A6 /* Frameworks */,
@@ -118,6 +171,11 @@
 		C087CD38179A3E89006A85A6 /* GSTest */ = {
 			isa = PBXGroup;
 			children = (
+				C0659806179C8BE1003BC69D /* MockDataParameter */,
+				C0659800179C8AB8003BC69D /* GSNetworkMockData.h */,
+				C0659801179C8AB8003BC69D /* GSNetworkMockData.m */,
+				C087CD67179A3EF4006A85A6 /* GSNetworkMockURLProtocol.h */,
+				C087CD68179A3EF4006A85A6 /* GSNetworkMockURLProtocol.m */,
 				C087CD41179A3E89006A85A6 /* GSAppDelegate.h */,
 				C087CD42179A3E89006A85A6 /* GSAppDelegate.m */,
 				C087CD44179A3E89006A85A6 /* Main.storyboard */,
@@ -132,6 +190,7 @@
 		C087CD39179A3E89006A85A6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C05A0A8E17A1D16600D64720 /* MockDataParameter */,
 				C087CD3A179A3E89006A85A6 /* GSTest-Info.plist */,
 				C087CD3B179A3E89006A85A6 /* InfoPlist.strings */,
 				C087CD3E179A3E89006A85A6 /* main.m */,
@@ -145,6 +204,9 @@
 			children = (
 				C087CD58179A3E89006A85A6 /* Supporting Files */,
 				C087CD6B179A3F19006A85A6 /* GSNetworkMockURLProtocolTests.m */,
+				C0FAFBED17A177F3007E7EDE /* GSNetworkMockDataTests.m */,
+				C05A0A8F17A1D1A900D64720 /* GSNetworkMockDataStringParameterTests.m */,
+				C05A0A9117A1D38800D64720 /* GSNetworkMockDataJSONParameterTests.m */,
 			);
 			path = GSTestTests;
 			sourceTree = "<group>";
@@ -267,7 +329,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0659805179C8BAC003BC69D /* GSNetworkMockDataParameter.m in Sources */,
 				C087CD6A179A3EF4006A85A6 /* GSNetworkMockURLProtocol.m in Sources */,
+				C065980E179C8C6C003BC69D /* GSNetworkMockDataJSONParameter.m in Sources */,
+				C0659802179C8AB8003BC69D /* GSNetworkMockData.m in Sources */,
+				C05A0A9217A1D38800D64720 /* GSNetworkMockDataJSONParameterTests.m in Sources */,
+				C0FAFBEF17A177F3007E7EDE /* GSNetworkMockDataTests.m in Sources */,
+				C05A0A9017A1D1A900D64720 /* GSNetworkMockDataStringParameterTests.m in Sources */,
+				C0659809179C8BFB003BC69D /* GSNetworkMockDataStringParameter.m in Sources */,
 				C087CD6C179A3F19006A85A6 /* GSNetworkMockURLProtocolTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,6 +532,7 @@
 				C087CD63179A3E89006A85A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C087CD64179A3E89006A85A6 /* Build configuration list for PBXNativeTarget "GSTestTests" */ = {
 			isa = XCConfigurationList;
@@ -471,6 +541,7 @@
 				C087CD66179A3E89006A85A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
