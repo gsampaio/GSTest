@@ -5,7 +5,7 @@ namespace :test do
   end
 end
 
-desc "Run the AFNetworking Tests for iOS & Mac OS X"
+desc "Run the GSTest Tests for iOS"
 task :test => ['test:ios'] do
   puts "\033[0;31m! iOS unit tests failed" unless $ios_success
   if $ios_success
