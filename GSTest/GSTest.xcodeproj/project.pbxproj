@@ -74,6 +74,7 @@
 		C087CD67179A3EF4006A85A6 /* GSNetworkMockURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSNetworkMockURLProtocol.h; path = GSTest/GSNetworkMockURLProtocol.h; sourceTree = "<group>"; };
 		C087CD68179A3EF4006A85A6 /* GSNetworkMockURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GSNetworkMockURLProtocol.m; path = GSTest/GSNetworkMockURLProtocol.m; sourceTree = "<group>"; };
 		C087CD6B179A3F19006A85A6 /* GSNetworkMockURLProtocolTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSNetworkMockURLProtocolTests.m; sourceTree = "<group>"; };
+		C0DAFF1317A1DB7500FFEC43 /* GSTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSTest.h; path = GSTest/GSTest.h; sourceTree = "<group>"; };
 		C0FAFBED17A177F3007E7EDE /* GSNetworkMockDataTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSNetworkMockDataTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,6 +172,7 @@
 		C087CD38179A3E89006A85A6 /* GSTest */ = {
 			isa = PBXGroup;
 			children = (
+				C0DAFF1317A1DB7500FFEC43 /* GSTest.h */,
 				C0659806179C8BE1003BC69D /* MockDataParameter */,
 				C0659800179C8AB8003BC69D /* GSNetworkMockData.h */,
 				C0659801179C8AB8003BC69D /* GSNetworkMockData.m */,
