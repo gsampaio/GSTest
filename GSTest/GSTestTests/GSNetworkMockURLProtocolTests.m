@@ -59,8 +59,7 @@
     XCTAssertTrue(networkMockURLProtocolIsSubclass, @"GSNetworkMockURLProtocol should be subclass of NSURLProtocol");
 }
 
-#pragma mark - +[GSNetworkMockURLProtocol executeMockData:withTestBlock:]
- tests
+#pragma mark - +[GSNetworkMockURLProtocol executeMockData:withTestBlock:] tests
 
 - (void)testMockDataErrorWhenStatusIs500
 {
